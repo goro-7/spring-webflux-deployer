@@ -7,6 +7,8 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+import java.net.InetSocketAddress;
+
 import static java.lang.String.format;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.TEXT_EVENT_STREAM;
@@ -26,7 +28,8 @@ public interface RefreshFns {
 
     static HandlerFunction<ServerResponse> refreshHandler() {
         return request -> {
-            log.info("Got server refresh request from ip : {}", request.remoteAddress());
+            InetSocketAddress remoteAddress = request.remoteAddress().orElseThrow();
+            log.info("Got server refresh request from ip : {}", remoteAddress);
             int status = CommandRunner.refreshCode();
             String message = format("The result of hot refresh : {}", status);
             return ServerResponse
