@@ -1,6 +1,12 @@
 # Spring-Webflux-Tools
-These are some ready to import and use common tools which you can use in your
-Spring Boot / Spring WebFlux project.
+Simply use github webhook and spring boot devtools to create automatic deployment for your 
+spring webflux application. On your push to remote branch, application is refreshed with new
+code using devtools hot reload and retarts.
+Changes propogation from your local to remote server is
+- easy
+- fast
+- simple
+- minimum refresh rate
 
 ## List of tools
 
