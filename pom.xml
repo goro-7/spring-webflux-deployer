@@ -13,7 +13,7 @@
 
     <!-- project details -->
     <artifactId>spring-webflux-deployer</artifactId>
-    <version>0.0-SNAPSHOT</version>
+    <version>0.0</version>
     <packaging>jar</packaging>
 
     <properties>
