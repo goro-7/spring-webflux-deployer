@@ -15,6 +15,9 @@
     <artifactId>spring-webflux-deployer</artifactId>
     <version>0.0</version>
     <packaging>jar</packaging>
+    <name>spring-webflux-deployer</name>
+    <description>A application with api to perform continuous deployment using spring-devtools and github webhook</description>
+    <url>https://github.com/goro-79/spring-webflux-deployer</url>
 
     <properties>
         <java.version>11</java.version>
@@ -76,4 +79,32 @@
             <url>https://repo.spring.io/milestone</url>
         </repository>
     </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>nexus-site</id>
+            <url>http://central_nexus/server</url>
+        </repository>
+    </distributionManagement>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>gaurav salvi</name>
+            <email>admin@goro.live</email>
+            <organization>goro-live</organization>
+            <organizationUrl>https://www.goro.live</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/goro-79/spring-webflux-deployer.git</connection>
+        <url>https://github.com/goro-79/spring-webflux-deployer</url>
+    </scm>
 </project>

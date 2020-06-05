@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.reactive.function.server.HandlerFunction;
 import org.springframework.web.reactive.function.server.RouterFunction;
+import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
@@ -28,15 +29,24 @@ public interface RefreshFns {
 
     static HandlerFunction<ServerResponse> refreshHandler() {
         return request -> {
-            InetSocketAddress remoteAddress = request.remoteAddress().orElseThrow();
-            log.info("Got server refresh request from ip : {}", remoteAddress);
+            logRequest(request);
+
             int status = CommandRunner.refreshCode();
             String message = format("The result of hot refresh : %d", status);
-            return ServerResponse
-                    .ok()
-                    .contentType(TEXT_EVENT_STREAM)
-                    .bodyValue(message);
+            return buildResponse(message);
         };
+    }
+
+    static Mono<ServerResponse> buildResponse(String message) {
+        return ServerResponse
+                .ok()
+                .contentType(TEXT_EVENT_STREAM)
+                .bodyValue(message);
+    }
+
+    static void logRequest(ServerRequest request) {
+        InetSocketAddress remoteAddress = CommandRunner.isTest ? null : request.remoteAddress().orElseThrow();
+        log.info("Got server refresh request from ip : {}", remoteAddress);
     }
 
 }
