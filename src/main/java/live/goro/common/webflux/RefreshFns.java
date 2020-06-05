@@ -7,6 +7,7 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+import static java.lang.String.format;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.TEXT_EVENT_STREAM;
 import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
@@ -25,11 +26,12 @@ public interface RefreshFns {
 
     static HandlerFunction<ServerResponse> refreshHandler() {
         return request -> {
-            Mono<Integer> status = Mono.just(CommandRunner.refreshCode());
+            int status = CommandRunner.refreshCode();
+            String message = format("The result of hot refresh : {}", status);
             return ServerResponse
                     .ok()
                     .contentType(TEXT_EVENT_STREAM)
-                    .body(status, String.class);
+                    .bodyValue(message);
         };
     }
 
