@@ -23,7 +23,7 @@ public interface CommandRunner {
 
     static int refreshCode() {
         int fetch = run(GIT_FETCH);
-        int reset = isTest ? run(GIT_RESET) : 0;
+        int reset = isTest ? 0 : run(GIT_RESET);
         int compile = run(MVN_COMPILE);
         int result = fetch + reset + compile;
         log.info("Hot Reload result : {}", result);
