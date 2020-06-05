@@ -6,6 +6,8 @@ import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWeb
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import java.time.Duration;
+
 import static live.goro.common.webflux.RefreshFns.PATH;
 
 @SpringBootTest
@@ -19,7 +21,9 @@ public class RefreshApiTest {
     @Test
     void shouldRefreshApplication() {
 
-        client.post()
+        client.mutate().responseTimeout(Duration.ofSeconds(30))
+                .build()
+                .post()
                 .uri(REFRESH_URI)
                 .exchange()
                 .expectStatus()
