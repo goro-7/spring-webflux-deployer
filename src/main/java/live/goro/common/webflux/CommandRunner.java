@@ -58,7 +58,6 @@ public interface CommandRunner {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(errorStream))) {
             List<String> lines = br.lines().collect(Collectors.toList());
             lines.forEach(line -> {
-                System.out.println(line);
                 log.info(line);
             });
             return lines;
