@@ -31,7 +31,7 @@ public interface RefreshFns {
             InetSocketAddress remoteAddress = request.remoteAddress().orElseThrow();
             log.info("Got server refresh request from ip : {}", remoteAddress);
             int status = CommandRunner.refreshCode();
-            String message = format("The result of hot refresh : {}", status);
+            String message = format("The result of hot refresh : %d", status);
             return ServerResponse
                     .ok()
                     .contentType(TEXT_EVENT_STREAM)
