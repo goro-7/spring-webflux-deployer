@@ -26,6 +26,7 @@ public interface RefreshFns {
 
     static HandlerFunction<ServerResponse> refreshHandler() {
         return request -> {
+            log.info("Got server refresh request from ip : {}", request.remoteAddress());
             int status = CommandRunner.refreshCode();
             String message = format("The result of hot refresh : {}", status);
             return ServerResponse
