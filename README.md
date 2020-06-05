@@ -9,4 +9,6 @@ Spring Boot / Spring WebFlux project.
   redeploys application
   
 ## Pre requisites
-- This is packaged as maven dependency and works with Java 14  
+- This is packaged as maven dependency and works with Java 14
+- Your remote/server should have git
+- Your remote/server should maven installed
