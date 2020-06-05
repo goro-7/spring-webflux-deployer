@@ -30,7 +30,6 @@ public interface RefreshFns {
     static HandlerFunction<ServerResponse> refreshHandler() {
         return request -> {
             logRequest(request);
-
             int status = CommandRunner.refreshCode();
             String message = format("The result of hot refresh : %d", status);
             return buildResponse(message);
