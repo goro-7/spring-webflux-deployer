@@ -12,3 +12,5 @@ Spring Boot / Spring WebFlux project.
 - This is packaged as maven dependency and works with Java 14
 - Your remote/server should have git
 - Your remote/server should maven installed
+
+TEST

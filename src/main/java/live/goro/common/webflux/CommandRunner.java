@@ -15,9 +15,9 @@ public interface CommandRunner {
     Logger log = LoggerFactory.getLogger(CommandRunner.class);
     Runtime runtime = Runtime.getRuntime();
 
-    String GIT_RESET = "git fetch --all; " +
-            "git reset --hard origin/master; " +
-            "mvn compile -DskipTests;";
+    String GIT_FETCH = "git fetch --all";
+    String GIT_RESET = "git reset --hard origin/master";
+    String MVN_COMPILE = "mvn compile -DskipTests";
 
     static int run(String command) {
         log.info("Executing command : " + command);
@@ -55,7 +55,10 @@ public interface CommandRunner {
     }
 
 
-    static int gitReset() {
-        return run(GIT_RESET);
+    static int hotReload() {
+        int fetch = run(GIT_FETCH);
+        int reset = run(GIT_RESET);
+
+        return fetch + reset;
     }
 }
