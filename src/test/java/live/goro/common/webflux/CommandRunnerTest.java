@@ -14,7 +14,7 @@ public class CommandRunnerTest {
 
     @Test
     void shouldGitReset() {
-        int status = CommandRunner.recompile();
+        int status = CommandRunner.refreshCode();
         assertEquals(status, 0);
     }
 }

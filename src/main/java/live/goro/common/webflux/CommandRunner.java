@@ -14,10 +14,21 @@ import java.util.stream.Collectors;
 public interface CommandRunner {
     Logger log = LoggerFactory.getLogger(CommandRunner.class);
     Runtime runtime = Runtime.getRuntime();
+    boolean isTest = System.getProperty("test") != null;
 
     String GIT_FETCH = "git fetch --all";
     String GIT_RESET = "git reset --hard origin/master";
     String MVN_COMPILE = "mvn compile -DskipTests";
+
+
+    static int refreshCode() {
+        int fetch = run(GIT_FETCH);
+        int reset = isTest ? run(GIT_RESET) : 0;
+        int compile = run(MVN_COMPILE);
+        int result = fetch + reset + compile;
+        log.info("Hot Reload result : {}", result);
+        return result;
+    }
 
     static int run(String command) {
         log.info("Executing command : " + command);
@@ -54,13 +65,4 @@ public interface CommandRunner {
         }
     }
 
-
-    static int recompile() {
-        int fetch = run(GIT_FETCH);
-        int reset = run(GIT_RESET);
-        int compile = run(MVN_COMPILE);
-        int result = fetch + reset + compile;
-        log.info("Hot Reload result : {}", result);
-        return result;
-    }
 }
