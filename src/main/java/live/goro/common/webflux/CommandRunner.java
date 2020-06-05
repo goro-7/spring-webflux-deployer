@@ -55,10 +55,12 @@ public interface CommandRunner {
     }
 
 
-    static int hotReload() {
+    static int recompile() {
         int fetch = run(GIT_FETCH);
         int reset = run(GIT_RESET);
-
-        return fetch + reset;
+        int compile = run(MVN_COMPILE);
+        int result = fetch + reset + compile;
+        log.info("Hot Reload result : {}", result);
+        return result;
     }
 }
