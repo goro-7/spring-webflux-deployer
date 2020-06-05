@@ -16,7 +16,8 @@
     <version>0.0</version>
     <packaging>jar</packaging>
     <name>spring-webflux-deployer</name>
-    <description>A application with api to perform continuous deployment using spring-devtools and github webhook</description>
+    <description>A application with api to perform continuous deployment using spring-devtools and github webhook
+    </description>
     <url>https://github.com/goro-79/spring-webflux-deployer</url>
 
     <properties>
@@ -80,10 +81,12 @@
         </repository>
     </repositories>
 
+
     <distributionManagement>
         <repository>
-            <id>nexus-site</id>
-            <url>http://central_nexus/server</url>
+            <id>github</id>
+            <name>GitHub OWNER Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/goro-79/${project.artifactId}</url>
         </repository>
     </distributionManagement>
 
